@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}">
+    <title>Магазин</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <br>
+    <h1>Информация о продуктах</h1>
+
+    <span>
+        <!--<a th:href="@{'/maxprice'}" th:text="Только максимальная цена"/>-->
+        <!--<a th:href="@{'/minprice'}" th:text="Только минимальная цена"/>-->
+        <a th:href="@{'/'}">Все</a>
+        <a th:href="@{'/minprice'}">Только минимальная цена</a>
+        <a th:href="@{'/maxprice'}">Только максимальная цена</a>
+        <a th:href="@{'/previous'}">Предыдущая</a>
+        <a th:href="@{'/next'}">Следующая</a>
+    </span>
+
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Наименование</th>
+            <th>Стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productID}"/>
+            <td th:text="${product.productName}"/>
+            <td th:text="${product.productCost}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
