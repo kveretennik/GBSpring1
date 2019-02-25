@@ -1,13 +1,13 @@
-Вопросы:
+Р’РѕРїСЂРѕСЃС‹:
 
-1. Использую последовательность, но id почему-то не генерируется.
-2. При редактировании и добавлении продукта приходится явно проставлять enabledFlag(в базе по умолчанию TRUE). Как этого избежать?
-3. При редактировании продукта id беру из пути, как редактировать по-другому, чтобы не показывать id?
-4. Хотел обойтись одним файлом add-product.html для редактирования и добавления, но не смог сделать
-   разные th:action для формы.
-   Так не заработало: <form th:action="@{'/' + ${product.getProductName() == null ? 'add' : 'edit/' + ${product.productID}}}" th:object="${product}" method="post">
-5. При ограничении по минимальной/максимальной цене первый запрос отрабатывает нормально, но
-   при переходе по страницам поля очищаются и продукты не выводятся. Как поправить?
+1. РСЃРїРѕР»СЊР·СѓСЋ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ, РЅРѕ id РїРѕС‡РµРјСѓ-С‚Рѕ РЅРµ РіРµРЅРµСЂРёСЂСѓРµС‚СЃСЏ.
+2. РџСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё Рё РґРѕР±Р°РІР»РµРЅРёРё РїСЂРѕРґСѓРєС‚Р° РїСЂРёС…РѕРґРёС‚СЃСЏ СЏРІРЅРѕ РїСЂРѕСЃС‚Р°РІР»СЏС‚СЊ enabledFlag(РІ Р±Р°Р·Рµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ TRUE). РљР°Рє СЌС‚РѕРіРѕ РёР·Р±РµР¶Р°С‚СЊ?
+3. РџСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё РїСЂРѕРґСѓРєС‚Р° id Р±РµСЂСѓ РёР· РїСѓС‚Рё, РєР°Рє СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РїРѕ-РґСЂСѓРіРѕРјСѓ, С‡С‚РѕР±С‹ РЅРµ РїРѕРєР°Р·С‹РІР°С‚СЊ id?
+4. РҐРѕС‚РµР» РѕР±РѕР№С‚РёСЃСЊ РѕРґРЅРёРј С„Р°Р№Р»РѕРј add-product.html РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Рё РґРѕР±Р°РІР»РµРЅРёСЏ, РЅРѕ РЅРµ СЃРјРѕРі СЃРґРµР»Р°С‚СЊ
+   СЂР°Р·РЅС‹Рµ th:action РґР»СЏ С„РѕСЂРјС‹.
+   РўР°Рє РЅРµ Р·Р°СЂР°Р±РѕС‚Р°Р»Рѕ: <form th:action="@{'/' + ${product.getProductName() == null ? 'add' : 'edit/' + ${product.productID}}}" th:object="${product}" method="post">
+5. РџСЂРё РѕРіСЂР°РЅРёС‡РµРЅРёРё РїРѕ РјРёРЅРёРјР°Р»СЊРЅРѕР№/РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ С†РµРЅРµ РїРµСЂРІС‹Р№ Р·Р°РїСЂРѕСЃ РѕС‚СЂР°Р±Р°С‚С‹РІР°РµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ, РЅРѕ
+   РїСЂРё РїРµСЂРµС…РѕРґРµ РїРѕ СЃС‚СЂР°РЅРёС†Р°Рј РїРѕР»СЏ РѕС‡РёС‰Р°СЋС‚СЃСЏ Рё РїСЂРѕРґСѓРєС‚С‹ РЅРµ РІС‹РІРѕРґСЏС‚СЃСЏ. РљР°Рє РїРѕРїСЂР°РІРёС‚СЊ?
 
 @Entity
 @Table(schema = "test", name = "products")
@@ -33,7 +33,7 @@ INDEX.html
 <head>
     <meta charset="UTF-8">
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}">
-    <title>Магазин</title>
+    <title>РњР°РіР°Р·РёРЅ</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -43,30 +43,30 @@ INDEX.html
     <div th:replace="~{navigation :: navi(Home)}"/>
     <div class="container">
         <br>
-        <h1>Информация о продуктах</h1>
+        <h1>РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РїСЂРѕРґСѓРєС‚Р°С…</h1>
 
         <form class="form-inline" th:action="@{/find}" th:object="${minMaxSearch}" method="get">
-            <label class="sr-only" for="inlineFormMinCost">Минимальная цена</label>
+            <label class="sr-only" for="inlineFormMinCost">РњРёРЅРёРјР°Р»СЊРЅР°СЏ С†РµРЅР°</label>
             <input type="number" class="form-control mb-2 mr-sm-2" id="inlineFormMinCost" placeholder="Min Cost" th:field="*{minCost}">
 
 
-            <label class="sr-only" for="inlineFormMaxCost">Максимальная цена</label>
+            <label class="sr-only" for="inlineFormMaxCost">РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ С†РµРЅР°</label>
             <div class="input-group mb-2 mr-sm-2">
                 <input type="number" class="form-control" id="inlineFormMaxCost" placeholder="Max Cost" th:field="*{maxCost}">
             </div>
 
-            <button type="submit" class="btn btn-primary mb-2">Найти</button>
+            <button type="submit" class="btn btn-primary mb-2">РќР°Р№С‚Рё</button>
         </form>
 
-        <span th:if="${products.getTotalPages() == 0}">Товаров нет</span>
+        <span th:if="${products.getTotalPages() == 0}">РўРѕРІР°СЂРѕРІ РЅРµС‚</span>
         <div th:unless="${products.getTotalPages() == 0}">
             <table class="table table-hover">
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Наименование</th>
-                    <th>Стоимость</th>
-                    <th>Действия</th>
+                    <th>РќР°РёРјРµРЅРѕРІР°РЅРёРµ</th>
+                    <th>РЎС‚РѕРёРјРѕСЃС‚СЊ</th>
+                    <th>Р”РµР№СЃС‚РІРёСЏ</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,8 +75,8 @@ INDEX.html
                     <td th:text="${product.productName}"/>
                     <td th:text="${product.productCost}"/>
                     <td>
-                        <!--<a th:href="@{'/edit/' + ${product.productID}}" th:text="Редактировать"/>-->
-                        <a th:href="@{'/edit/' + ${product.productID}}" th:text="Редактировать"/>
+                        <!--<a th:href="@{'/edit/' + ${product.productID}}" th:text="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"/>-->
+                        <a th:href="@{'/edit/' + ${product.productID}}" th:text="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"/>
                     </td>
                 </tr>
                 </tbody>
@@ -112,7 +112,7 @@ ADD-PRODUCT.html
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Добавить товар</title>
+    <title>Р”РѕР±Р°РІРёС‚СЊ С‚РѕРІР°СЂ</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -130,14 +130,14 @@ ADD-PRODUCT.html
         <form th:action="@{'/edit/' + ${product.productID}}" th:object="${product}" method="post">
         <!--<form th:action="@{'/' + ${product.getProductName() == null ? 'add' : 'edit/' + ${product.productID}}}" th:object="${product}" method="post">-->
             <div class="form-group">
-                <label for="productTitle">Название</label>
-                <input type="text" th:field="*{productName}" class="form-control" id="productTitle" placeholder="Введите название товара">
+                <label for="productTitle">РќР°Р·РІР°РЅРёРµ</label>
+                <input type="text" th:field="*{productName}" class="form-control" id="productTitle" placeholder="Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ С‚РѕРІР°СЂР°">
             </div>
             <div class="form-group">
-                <label for="productCost">Цена</label>
-                <input th:field="*{productCost}" type="text" class="form-control" id="productCost" placeholder="Введите цену товара">
+                <label for="productCost">Р¦РµРЅР°</label>
+                <input th:field="*{productCost}" type="text" class="form-control" id="productCost" placeholder="Р’РІРµРґРёС‚Рµ С†РµРЅСѓ С‚РѕРІР°СЂР°">
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" class="btn btn-primary">РЎРѕС…СЂР°РЅРёС‚СЊ</button>
         </form>
     </div>
 </body>
